@@ -49,7 +49,7 @@ func (s *ProviderServer) Present(domain, token, keyAuth string) error {
 		return fmt.Errorf("could not start HTTP server for challenge: %w", err)
 	}
 
-	if s.network == "unix" {
+	if s.network == "unix" && s.address[0] != '@' {
 		if err = os.Chmod(s.address, s.socketMode); err != nil {
 			return fmt.Errorf("chmod %s: %w", s.address, err)
 		}
